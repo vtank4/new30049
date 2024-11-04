@@ -1,0 +1,44 @@
+.about-us-section {
+    padding: 50px 20px;
+}
+.title {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+.intro-text {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+.about-description {
+    margin: 20px 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.team-members {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.team-member-card {
+    padding: 20px;
+}
+.team-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+.name {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.role {
+    color: #777;
+    font-size: 1em;
+}

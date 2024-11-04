@@ -1,0 +1,107 @@
+[
+    {
+        "id": 1,
+        "house_data": {
+            "cbd_distance": 23.0,
+            "bedroom": 2,
+            "bathroom": 2,
+            "car_garage": 2,
+            "landsize": 223.0,
+            "building_area": 2323.0,
+            "built_year": 2022,
+            "suburb_name": "Oak Park",
+            "prop_type": "h"
+        },
+        "predicted_price": 708108.16
+    },
+    {
+        "id": 2,
+        "house_data": {
+            "cbd_distance": 23.0,
+            "bedroom": 2,
+            "bathroom": 2,
+            "car_garage": 2,
+            "landsize": 223.0,
+            "building_area": 2323.0,
+            "built_year": 2022,
+            "suburb_name": "Oak Park",
+            "prop_type": "h"
+        },
+        "predicted_price": 708108.16
+    },
+    {
+        "id": 3,
+        "house_data": {
+            "cbd_distance": 23.0,
+            "bedroom": 2,
+            "bathroom": 2,
+            "car_garage": 2,
+            "landsize": 223.0,
+            "building_area": 2323.0,
+            "built_year": 2022,
+            "suburb_name": "Oak Park",
+            "prop_type": "h"
+        },
+        "predicted_price": 708108.16
+    },
+    {
+        "id": 4,
+        "house_data": {
+            "cbd_distance": 2.0,
+            "bedroom": 2,
+            "bathroom": 2,
+            "car_garage": 2,
+            "landsize": 2232.0,
+            "building_area": 2323.0,
+            "built_year": 2022,
+            "suburb_name": "Oak Park",
+            "prop_type": "h"
+        },
+        "predicted_price": 1664738.44
+    },
+    {
+        "id": 5,
+        "house_data": {
+            "cbd_distance": 2.0,
+            "bedroom": 2,
+            "bathroom": 2,
+            "car_garage": 2,
+            "landsize": 2232.0,
+            "building_area": 2323.0,
+            "built_year": 2022,
+            "suburb_name": "Oak Park",
+            "prop_type": "h"
+        },
+        "predicted_price": 1664738.44
+    },
+    {
+        "id": 6,
+        "house_data": {
+            "cbd_distance": 2.0,
+            "bedroom": 2,
+            "bathroom": 2,
+            "car_garage": 2,
+            "landsize": 2232.0,
+            "building_area": 2323.0,
+            "built_year": 2022,
+            "suburb_name": "Oak Park",
+            "prop_type": "h"
+        },
+        "predicted_price": 1664738.44
+    },
+    {
+        "id": 7,
+        "house_data": {
+            "cbd_distance": 2.0,
+            "bedroom": 2,
+            "bathroom": 2,
+            "car_garage": 2,
+            "landsize": 2232.0,
+            "building_area": 2323.0,
+            "built_year": 2022,
+            "suburb_name": "Oak Park",
+            "prop_type": "h"
+        },
+        "predicted_price": 1664738.44
+    }
+]

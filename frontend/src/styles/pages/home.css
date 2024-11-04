@@ -1,0 +1,154 @@
+/* General Container Styles */
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Background Styling for First Content Section */
+.first-content {
+    position: relative; /* Ensure positioning context for the pseudo-element */
+}
+
+.first-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url(../../assets/home_bg.jpg) no-repeat center; /* Center the image */
+    background-size: 100% auto; /* Stretch width to fill while maintaining aspect ratio */
+    filter: brightness(50%);
+    z-index: 0;
+}
+
+/* About Content Styling */
+.about-content {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.about-box {
+    background-color: #808080;
+    opacity: 0.8;
+    z-index: 100;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-bottom: 10px solid #808080;
+}
+
+.responsive-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.logo {
+    width: 50%;
+}
+
+.sub-content h4 {
+    font-weight: 300;
+    text-transform: capitalize;
+    font-family: Arial, sans-serif;
+}
+
+.link {
+    background-color: #808080; /* Gray background */
+    color: white; /* White text */
+    padding: 10px 15px; /* Adjust padding */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Optional: add rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Display as inline-block */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.link:hover {
+    background-color: #A9A9A9; /* Lighter gray on hover */
+}
+
+
+
+/* Third Content Section */
+.third-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filter-search-group {
+    max-width: 800px;
+}
+
+.filter-select-input {
+    border: 1px solid black;
+    border-radius: 2px;
+    font-family: Arial, sans-serif;
+}
+
+.filter-select-input:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: black;
+}
+
+/* Team Member Cards */
+.team-member-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.card:hover {
+    transform: scale(1.01);
+}
+
+.black-text {
+    color: black;
+}
+
+
+/* Responsive Styles */
+@media (min-width: 992px) {
+    .introduction {
+        border-right: 2px dashed black;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .introduction {
+        border-right: none;
+        border-bottom: 1px dashed black;
+    }
+
+    .team-intro,
+    .name,
+    .responsive-text,
+    .responsive-title,
+    .link {
+        font-size: 16px;
+    }
+
+    .link {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .team-intro,
+    .name {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .team-intro,
+    .name {
+        font-size: 12px;
+    }
+}
