@@ -21,14 +21,23 @@ export default function NavBar() {
             </div>
           </div>
         </div>
+
+      {/* Main Navigation Bar */}
       <nav className='navbar navbar-expand-lg mt-1'>
         <div className='container-fluid'>
+          {/* Placeholder for brand link or logo linking */}
           <NavLink className="navbar-brand" to="#"></NavLink>
+
+           {/* Toggle button for mobile view, collapses navbar links */}
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
+
+          {/* Collapsible container for navbar links, centered with margin at top */}
           <div className='collapse navbar-collapse justify-content-center mt-2' id='navbarSupportedContent'>
             <ul className='navbar-nav mb-2 mb-lg-0 fw-medium'>
+
+              {/* Home Page Link */}
               <li className='nav-item'>
                 <NavLink
                   className={({ isActive }) => isActive ? 'nav-link text-white active-link' : 'nav-link text-black'}
@@ -37,6 +46,8 @@ export default function NavBar() {
                   Home
                 </NavLink>
               </li>
+
+               {/* Predict Price Page Link */}
               <li className='nav-item'>
                 <NavLink
                   className={({ isActive }) => isActive ? 'nav-link text-white active-link' : 'nav-link text-black'}
@@ -45,6 +56,8 @@ export default function NavBar() {
                   Predict Price
                 </NavLink>
               </li>
+
+              {/* Market Charts Page Link */}
               <li className='nav-item'>
                 <NavLink
                   className={({ isActive }) => isActive ? 'nav-link text-white active-link' : 'nav-link text-black'}
@@ -53,10 +66,12 @@ export default function NavBar() {
                   Market Charts
                 </NavLink>
               </li>
+
+               {/* About Us Page Link */}
               <li className='nav-item'>
                 <NavLink
                   className={({ isActive }) => isActive ? 'nav-link text-white active-link' : 'nav-link text-black'}
-                  to="/calculator"
+                  to="/about-us"
                 >
                   About Us
                 </NavLink>

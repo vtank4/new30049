@@ -1,10 +1,10 @@
 // Data_Visualization/Bar_chart/BarChartComponent.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import medianPriceSuburbData from '../data/Median_price_suburb'; // Import the data
+import medianPriceSuburbData from '../data/Median_price_suburb'; // Data containing median prices by suburb
 
 const BarChartComponent = () => {
-  const chartRef = useRef(null);
+  const chartRef = useRef(null); // Reference for the chart DOM element
   const [currentData, setCurrentData] = useState(medianPriceSuburbData[0]); // Initialize with the first suburb
   const [historyData, setHistoryData] = useState([]);
   const [selectedAttempt, setSelectedAttempt] = useState(null);

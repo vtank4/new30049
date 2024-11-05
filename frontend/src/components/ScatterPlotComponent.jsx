@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import * as d3 from 'd3';
-import dataCBD from '../data/denormalized_price_cbd.json'; // Adjust the path as needed
-import dataLandsize from '../data/denormalized_price_landsize.json'; // Adjust the path as needed
+import dataCBD from '../data/denormalized_price_cbd.json'; // CBD dataset (Distance to CBD and Price)
+import dataLandsize from '../data/denormalized_price_landsize.json'; // Landsize dataset (Landsize and Price)
 
 const ScatterPlotComponent = () => {
-    const [currentData, setCurrentData] = useState(dataCBD);
-    const [xField, setXField] = useState('CBD Distance');
-    const [yField, setYField] = useState('Price');
-    const [isCBD, setIsCBD] = useState(true); // State to track which dataset is currently displayed
+    const [currentData, setCurrentData] = useState(dataCBD); // Default dataset is CBD
+    const [xField, setXField] = useState('CBD Distance'); // Default x-axis field
+    const [yField, setYField] = useState('Price'); // y-axis field remains as Price
+    const [isCBD, setIsCBD] = useState(true); // Boolean to toggle between datasets (CBD or Landsize)
 
     const margin = { top: 20, right: 30, bottom: 70, left: 150 }; // Increased bottom and right margins
     const width = 800 - margin.left - margin.right;
@@ -17,21 +17,25 @@ const ScatterPlotComponent = () => {
         // Set up SVG dimensions and groups
         const svg = d3.select("#scatterPlot")
             .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+            .attr("width", width + margin.left + margin.right)  // SVG width with margins
+            .attr("height", height + margin.top + margin.bottom) // SVG height with margins
             .append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
-        const xScale = d3.scaleLinear().range([0, width]);
-        const yScale = d3.scaleLinear().range([height, 0]);
+        // Scales for x, y axes, and colors
+        const xScale = d3.scaleLinear().range([0, width]); // Linear scale for x-axis
+        const yScale = d3.scaleLinear().range([height, 0]); // Linear scale for y-axis
         const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
+         // Axes for the scatter plot
         const xAxis = d3.axisBottom(xScale);
         const yAxis = d3.axisLeft(yScale);
 
+        // Add x-axis and y-axis groups to the SVG
         svg.append("g").attr("class", "x-axis").attr("transform", `translate(0,${height})`);
         svg.append("g").attr("class", "y-axis");
 
+        // Add axis labels
         svg.append("text")
             .attr("class", "x-axis-label axis-label")
             .attr("x", width / 2)
@@ -45,7 +49,7 @@ const ScatterPlotComponent = () => {
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)");
 
-        // Create tooltip and set initial styles
+        // Tooltip setup for interactivity
         const tooltip = d3.select("body").append("div")
             .attr("class", "tooltip")
             .style("display", "none") // Initially hidden
@@ -54,21 +58,26 @@ const ScatterPlotComponent = () => {
             .style("border", "1px solid black")
             .style("padding", "10px")
             .style("border-radius", "5px")
-            .style("pointer-events", "none"); // Prevent mouse events on the tooltip
+            .style("pointer-events", "none"); // Tooltip style settings
 
-        // Function to update chart for a given dataset
+       // Function to update chart when data changes
         const updateChart = (data) => {
-            xScale.domain(d3.extent(data, d => d[xField]));
+            // Update x and y scales based on data range
+            xScale.domain(d3.extent(data, d => d[xField])); 
             yScale.domain(d3.extent(data, d => d[yField]));
 
+            // Update axes
             svg.select(".x-axis").transition().duration(1000).call(xAxis);
             svg.select(".y-axis").transition().duration(1000).call(yAxis);
 
+            // Update axis labels
             svg.select(".x-axis-label").text(xField);
             svg.select(".y-axis-label").text(yField);
 
+            // Bind data to circles
             const circles = svg.selectAll("circle").data(data);
 
+            // Enter new circles, update existing, and position based on data
             circles.enter().append("circle")
                 .attr("data-cluster", d => d.kmeans_3) // Add data attribute for cluster
                 .attr("fill", d => colorScale(d.kmeans_3))
@@ -79,6 +88,7 @@ const ScatterPlotComponent = () => {
                 .attr("cx", d => xScale(d[xField]))
                 .attr("cy", d => yScale(d[yField]));
 
+            // Remove extra circles not in new dataset
             circles.exit().remove();
 
             // Add interactivity with detailed tooltip
@@ -95,11 +105,11 @@ const ScatterPlotComponent = () => {
                             <strong>Cluster:</strong> ${d.kmeans_3}<br>
                             <strong>${xField}:</strong> ${d[xField]}<br>
                             <strong>${yField}:</strong> ${d[yField].toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-                        `);
+                        `); // Tooltip details
                 })
                 .on("mousemove", function (event) {
                     tooltip.style("left", (event.pageX + 15) + "px")
-                        .style("top", (event.pageY - 28) + "px");
+                        .style("top", (event.pageY - 28) + "px"); // Position tooltip
                 })
                 .on("mouseout", function () {
                     d3.select(this)
@@ -111,31 +121,34 @@ const ScatterPlotComponent = () => {
                 });
 
             // Cluster selection legend
-            const clusters = [...new Set(data.map(d => d.kmeans_3))];
+            const clusters = [...new Set(data.map(d => d.kmeans_3))]; // Unique cluster groups
 
             const legend = svg.append("g")
-                .attr("transform", `translate(${width - 150}, 10)`);
+                .attr("transform", `translate(${width - 150}, 10)`); // Position legend
 
             clusters.forEach((cluster, index) => {
+                // Legend item for each cluster
                 legend.append("rect")
                     .attr("x", 0)
                     .attr("y", index * 25)
                     .attr("width", 20)
                     .attr("height", 20)
                     .attr("fill", colorScale(cluster))
-                    .on("click", () => handleClusterClick(cluster));
+                    .on("click", () => handleClusterClick(cluster)); // Filter on click
 
                 legend.append("text")
                     .attr("x", 30)
                     .attr("y", index * 25 + 15)
                     .text(`Group ${cluster}`)
-                    .style("cursor", "pointer");
+                    .style("cursor", "pointer"); // Cluster label
             });
         };
 
+        // Function to handle cluster filtering
         const handleClusterClick = (cluster) => {
             const isActive = svg.selectAll("circle").filter(d => d.kmeans_3 === cluster).classed("highlighted");
 
+            // Dim non-selected clusters
             svg.selectAll("circle")
                 .transition()
                 .duration(500)
@@ -144,6 +157,7 @@ const ScatterPlotComponent = () => {
             svg.selectAll("circle.highlighted")
                 .classed("highlighted", false);
 
+            // Highlight selected cluster
             if (!isActive) {
                 svg.selectAll(`circle[data-cluster='${cluster}']`)
                     .classed("highlighted", true)
@@ -156,7 +170,7 @@ const ScatterPlotComponent = () => {
         // Initial chart load with the current data
         updateChart(currentData);
 
-        // Zoom functionality
+        // Zoom functionality for the scatter plot
         const zoomHandler = d3.zoom()
             .scaleExtent([1, 10]) // Set the zoom limits
             .on("zoom", (event) => {
@@ -179,7 +193,7 @@ const ScatterPlotComponent = () => {
         };
     }, [currentData, xField, yField]); // Depend on currentData, xField, and yField
 
-    // Function to handle dataset switch
+    // Switch datasets between CBD and Landsize
     const handleSwitchData = () => {
         if (isCBD) {
             setCurrentData(dataLandsize);
@@ -191,7 +205,7 @@ const ScatterPlotComponent = () => {
         setIsCBD(!isCBD); // Toggle the dataset state
     };
 
-    // Reset function to show all circles again
+    // Reset button to clear any filters
     const handleReset = () => {
         d3.selectAll("circle")
             .transition()
