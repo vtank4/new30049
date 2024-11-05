@@ -91,13 +91,13 @@ def save_prediction_to_json(input_data, predicted_price):
 # Endpoint for predicting house prices
 @app.post("/predict")
 async def predict_price(property_data: PropertyData):
-    input_data = property_data.dict()
+    input_data = property_data.model_dump()
     predicted_price = property_price_model.predict_price(input_data)
     save_prediction_to_json(input_data, predicted_price)
     return {"predicted_price": round(predicted_price, 2)}
 
 # Endpoint for fetching all predictions
-@app.get("/prediction-history/")
+@app.get("/prediction-history")
 async def get_predictions():
     try:
         if os.path.exists(PREDICTION_FILE):
@@ -111,7 +111,7 @@ async def get_predictions():
 
 # Custom 404 error handler
 @app.exception_handler(HTTPException)
-async def http_exception_handler(request: Request, exc: HTTPException):
+async def http_exception_handler(exc: HTTPException):
     return JSONResponse(
         status_code=exc.status_code,
         content={"detail": exc.detail}
